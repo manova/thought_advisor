@@ -1,0 +1,47 @@
+!!! 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/solr.css')
+    script(type='text/javascript', src='/scripts/jquery.min.js')
+    script(type='text/javascript', src='/scripts/jquery-ui.min.js')
+    link(rel='stylesheet', href="/stylesheets/jquery-ui.css")
+    script(type='text/javascript', src='/scripts/js/reuters.new.js')
+    script(type='text/javascript', src='scripts/core/Core.js')
+    script(type='text/javascript', src='scripts/core/AbstractManager.js')
+    script(type='text/javascript', src='scripts/managers/Manager.jquery.js')
+    script(type='text/javascript', src='scripts/core/Parameter.js')
+    script(type='text/javascript', src='scripts/core/ParameterStore.js')
+    script(type='text/javascript', src='scripts/core/AbstractWidget.js')
+    script(type='text/javascript', src='scripts/widgets/ResultWidget.2.0.js')
+    script(type='text/javascript', src='scripts/widgets/ContentTypeWidget.js')
+    script(type='text/javascript', src='scripts/widgets/jquery/PagerWidget.js')        
+    script(type='text/javascript', src='scripts/core/AbstractFacetQueryWidget.js')
+    script(type='text/javascript', src='scripts/widgets/UrlQueryWidget.js')
+    script(type='text/javascript', src='scripts/widgets/CurrentSearchWidget.js')
+    script(type='text/javascript', src='scripts/core/AbstractTextWidget.js')
+    script(type='text/javascript', src='scripts/widgets/TextWidget.js')
+    
+  body
+    div#wrap
+      div#header
+        h1 ThoughtAdvisor (Beta)
+        h2 Thought Leadership at its best
+      div.right
+        div#result
+          div#content-type-navigation
+            ul#contenter
+          div#navigation
+            ul#pager
+            div#pager-header
+          div#docs
+          
+      div.left
+        h2 Search
+        ul#search
+          input(type="text", id="query", name="query", autocomplete="off")
+        div#company_profile
+        h2 By Company
+        div#urls
+        div.clear
+      div.clear
