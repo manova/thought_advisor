@@ -11,8 +11,8 @@ AjaxSolr.UrlQueryWidget = AjaxSolr.AbstractFacetQueryWidget.extend({
       var maxCount = 0;
       var urls = [];
       var url_count = {};
-      for (var facet in this.manager.response.facet_counts.facet_queries) { 
-        var domain = facet.split(':')[1];     
+      for (var facet in this.manager.response.facet_counts.facet_queries) {
+        var domain = facet.split(':')[1];
         var count = this.manager.response.facet_counts.facet_queries[facet];
         if (count > maxCount) {
           maxCount = count;
@@ -23,7 +23,6 @@ AjaxSolr.UrlQueryWidget = AjaxSolr.AbstractFacetQueryWidget.extend({
         }
       }
       console.log("urls: ", urls);
-      var self = this;
       $.ajax({
         type:"get",
         data:{urls:urls},
@@ -39,7 +38,7 @@ AjaxSolr.UrlQueryWidget = AjaxSolr.AbstractFacetQueryWidget.extend({
           $(self.target).append("<h4>Filter By Company<h4>");
           $(self.target).append(self.template('url', options));
         }
-      });   
+      });
     }
     console.log(this.target);
     $(document).on('change', '#url', function () {
@@ -47,35 +46,35 @@ AjaxSolr.UrlQueryWidget = AjaxSolr.AbstractFacetQueryWidget.extend({
       if (value) {
         $.get(
           "/company",
-          {name: value}, 
+          {name: value},
           function(response){
             var data = JSON.parse(response);
             self.add(data.url);
-            self.doRequest(); 
+            self.doRequest();
             $('#company_profile').empty();
             $('#company_profile').append("<ul class='company-name'><li id='company-name'><b>"+ data.name + "</b></li><li class='pull-right'><a id = 'remove-filter' class = 'btn btn-danger'><i class=icon-remove-sign> remove company filter</i></a></li></ul>");
             $('#company_profile').append("<div>" + data.description + "</div>");
-            $('#company_profile').append("<a href='http://"+data.url+"' target='_blank'><h5>view website!</h5></a>");
+            $('#company_profile').append("<div class='company-link'><a href='http://"+data.url+"' target='_blank'><b>view website!</b></a></div>");
             if (data.address_street_1) {
-              $('#company_profile').append("<div>" + data.address_street_1+ " " + data.address_street_2 + "</div>"); 
-              $('#company_profile').append("<div>" + data.city+" "+data.state+" "+data.zip_code+"</div>");                             
+              $('#company_profile').append("<div>" + data.address_street_1+ " " + data.address_street_2 + "</div>");
+              $('#company_profile').append("<div>" + data.city+" "+data.state+" "+data.zip_code+"</div>");
             }
-            $('#company_profile').append("<div>" + data.country+"</div>"); 
+            $('#company_profile').append("<div>" + data.country+"</div>");
             $('#company_profile').append("<ul class = 'company_social'></ul>");
             if (data.twitter) {
-              $('.company_social').append("<li class='socials'><a href='"+data.twitter+"' class='btn btn-twitter'><i class='icon-twitter'> | Follow</i></a></li>");     
+              $('.company_social').append("<li class='socials'><a href='"+data.twitter+"' class='btn btn-twitter'><i class='icon-twitter'> | Follow</i></a></li>");
             }
             if (data.linkedin) {
-              $('.company_social').append("<li class='socials'><a href='"+data.linkedin+"' class='btn btn-linkedin'><i class='icon-linkedin'> | Connect</i></a></li>");              
+              $('.company_social').append("<li class='socials'><a href='"+data.linkedin+"' class='btn btn-linkedin'><i class='icon-linkedin'> | Connect</i></a></li>");
             }
             if (data.blog) {
-              $('.company_social').append("<li class='socials'><a href='"+data.blog+"' class='btn btn-rss'><i class='icon-rss'> | view blog</i></a></li>");     
+              $('.company_social').append("<li class='socials'><a href='"+data.blog+"' class='btn btn-rss'><i class='icon-rss'> | view blog</i></a></li>");
             }
             $('#remove-filter').click(function(e){
               $('#company_profile').empty();
               self.manager.store.removeByValue('fq', new RegExp('^-?' + self.field + ':'));
               self.doRequest();
-            }); 
+            });
           },
           "text"
         );
@@ -96,7 +95,7 @@ AjaxSolr.UrlQueryWidget = AjaxSolr.AbstractFacetQueryWidget.extend({
     $(this.target).append($('<a href="/solr">remove company filter<a>').click(function(){
       console.log("make updated request");
     }));
-    */  
+    */
   },
 
   template: function (name, container) {

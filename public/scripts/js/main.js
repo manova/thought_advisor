@@ -4,7 +4,8 @@ var Manager;
 
   $(function () {
     Manager = new AjaxSolr.Manager({
-      solrUrl: 'http://evolvingweb.ca/solr/reuters/'
+      solrUrl: 'http://localhost:8983/solr/collection1/'
+      //solrUrl: 'http://96.242.187.169:8983/solr/collection1/'
     });
     Manager.addWidget(new AjaxSolr.ResultWidget({
       id: 'result',
@@ -20,26 +21,27 @@ var Manager;
         $('#pager-header').html($('<span></span>').text('displaying ' + Math.min(total, offset + 1) + ' to ' + Math.min(total, offset + perPage) + ' of ' + total));
       }
     }));
-    var fields = [ 'topics', 'organisations', 'exchanges' ];
-    for (var i = 0, l = fields.length; i < l; i++) {
-      Manager.addWidget(new AjaxSolr.TagcloudWidget({
-        id: fields[i],
-        target: '#' + fields[i],
-        field: fields[i]
-      }));
-    }
-    Manager.addWidget(new AjaxSolr.CurrentSearchWidget({
-      id: 'currentsearch',
-      target: '#selection'
+    Manager.addWidget(new AjaxSolr.ContentTypeWidget({
+      id: 'contenter',
+      target: '#contenter',
+      contentTypes: {'web':['html', 'xhtml+xml'], 'pdf':['pdf'], 'doc':['doc']}//['pdf', 'xhtml+xml', 'html'],
+    }));
+    Manager.addWidget(new AjaxSolr.UrlQueryWidget({
+      id: 'urls',
+      target: '#urls',
+      field: 'url'
+    }));
+    Manager.addWidget(new AjaxSolr.TextWidget({
+      id: 'text',
+      target: '#search'
     }));
     Manager.init();
     Manager.store.addByValue('q', '*:*');
     var params = {
       facet: true,
-      'facet.field': [ 'topics', 'organisations', 'exchanges' ],
+      //'facet.query': ['url:www.fticonsulting.com', 'url:www.efficioconsulting.com', 'url:www.buckconsultants.com'],
+      'facet.field': ['url'],
       'facet.limit': 20,
-      'facet.mincount': 1,
-      'f.topics.facet.limit': 50,
       'json.nl': 'map'
     };
     for (var name in params) {
@@ -49,3 +51,4 @@ var Manager;
   });
 
 })(jQuery);
+

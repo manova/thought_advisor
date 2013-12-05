@@ -1,0 +1,60 @@
+!!! 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css")
+    link(rel='stylesheet', href='/stylesheets/social-buttons.css')
+    link(rel='stylesheet', href='/stylesheets/admin.css')
+    script(type='text/javascript', src='/scripts/jquery.min.js')
+    script(type='text/javascript', src='/scripts/jquery-ui.min.js')
+
+  body
+    div.navbar.navbar-inverse.navbar-static-top
+      div.navbar-inner
+        div.container
+          ul.nav.pull-left
+            li
+              a(href='/solr')
+                img(src='images/logo.png')
+            li.vertical-divider-gray
+          ul.pull-left
+            span.navbar-search#search
+              input(class="search-query", "type="text", id="query", name="query", autocomplete="off", placeholder="Search")
+    #wrap
+      .container.push-down
+        form#admin_form(action='add_company', method='post')
+          div.row
+            input.push-right(type='text', name='name', placeholder='Company Name')
+            input.push-right(type='text', name='url', placeholder='Url')
+            input.push-right(type='text', name='twitter', placeholder='Twitter Handle')
+            input.push-right(type='text', name='blog', placeholder='Blog Url')
+            input.push-right(type='text', name='linkedin', placeholder='LinkedIn Account')
+          div.row
+            input.push-right(type='text', name='poc_first_name', placeholder='POC First Name')
+            input.push-right(type='text', name='poc_last_name', placeholder='POC Last Name')
+            input.push-right(type='text', name='poc_contact_email', placeholder='POC email')
+            input.push-right(type='text', name='poc_contact_number_1', placeholder='POC Number 1')
+            input.push-right(type='text', name='poc_contact_number_2', placeholder='POC Number 2')
+          div.row
+            input.span3.push-right(type='text', name='address_street_1', placeholder='Address Line 1')
+            input.span3.push-right(type='text', name='address_street_2', placeholder='Address Line 2')
+            input.span3.push-right(type='text', name='city', placeholder='City')
+            input.span3.push-right(type='text', name='State', placeholder='State')
+            input.span3(type='text', name='zip_code', placeholder='Zip Code')
+          div.row-fluid
+            input.span3.push-right.margin-left(type='text', name='country', placeholder='Country')
+            input.span3.push-right(type='text', name='size', placeholder='Company Size')
+            input.span4(type='text', name='services', placeholder='Geography')
+          div.row
+            input.span5.push-right.margin-left(type='text', name='industries', placeholder='Industries')
+            input.span5(type='text', name='geography', placeholder='Services')
+          div.row
+            textarea.span7(name='description', placeholder='Description......')
+          div.row
+            button.btn.btn-primary.btn-large
+              i.icon-white
+                | Submit
+    hr
+    div.navbar.navbar-static-bottom
+      p Copyright &copy; 2013 Thought Advisor, LLC. All rights reserved.

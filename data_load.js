@@ -1,9 +1,11 @@
+// This is a helper function to bootstrap the initial company data in mongo.
+// But this can be done from the recently added admin ui now.
 var db = require('mongoskin').db('localhost:27017/thoughtadvisor'),
 	Faker = require('./public/scripts/Faker');
 
 var companies = db.collection('companies');
 
-var company_data = [{name:'Efficio Consulting', url:'www.efficioconsulting.com', 
+var company_data = [{name:'Efficio Consulting', url:'www.efficioconsulting.com',
 description:'Efficio is a high calibre international consulting firm that helps its clients to deliver transformational procurement programmes. We attain measurable and sustainable results by driving strategic sourcing programmes while in parallel implementing and embedding procurement organisation, people and process changes. With a long track record of delivery and a results-focused culture, we are able to seamlessly integrate with your people and operate with integrity and transparency to deliver your project and create substantial cost reductions.',
 poc_contact_number_1:'00 44 20 7550 5677',
 poc_contact_number_2:'+1 972.628.6827',
@@ -23,7 +25,7 @@ zip_code:'WC2E 9LY',
 twitter:'http://www.twitter.com/buckconsultants',
 linkedin:'https://www.linkedin.com/company/buck-consultants?trk=hb_tab_compy_id_7992',
 blog:'http://blog.buckconsultants.com/'},
-{name: 'Buck Consultants', url: 'www.buckconsultants.com', 
+{name: 'Buck Consultants', url: 'www.buckconsultants.com',
 description: 'Buck Consultants is a global HR consulting firm that helps organizations develop, deploy, and manage their workforce. We provide real-world solutions to our clients’ complex HR and business challenges.',
 poc_contact_number_1:'+1 866.355.6647',
 poc_contact_number_2:'+1 972.628.6827',
@@ -44,7 +46,7 @@ twitter:'http://www.twitter.com/buckconsultants',
 linkedin:'https://www.linkedin.com/company/buck-consultants?trk=hb_tab_compy_id_7992',
 blog:'http://blog.buckconsultants.com/'
 },
-{name: 'Deloitte', url: 'www.deloitte.com', 
+{name: 'Deloitte', url: 'www.deloitte.com',
 description: 'In the United States, Deloitte LLP and its subsidiaries have 57,000 professionals with a single focus: serving our clients and helping them solve their toughest problems. We work in four key business areas — audit, financial advisory, tax and consulting — but our real strength comes from combining the talents of those groups to address clients’ needs. Fortune and BusinessWeek consistently rank our organization among the best places to work, which is good news for our talent and our clients alike. When the best people tackle the most compelling challenges, everyone wins.',
 poc_contact_number_1:'+1 866.355.6647',
 poc_contact_number_2:'+1 972.628.6827',
@@ -65,7 +67,7 @@ twitter:'http://www.twitter.com/buckconsultants',
 linkedin:'https://www.linkedin.com/company/buck-consultants?trk=hb_tab_compy_id_7992',
 blog:'http://blog.buckconsultants.com/'
 },
-{name: 'FTI Consulting', url: 'www.fticonsulting.com', 
+{name: 'FTI Consulting', url: 'www.fticonsulting.com',
 description: 'FTI Consulting is a global business advisory firm that provides multidisciplinary solutions to complex challenges and opportunities. With the full power of unique depth of thought combined with the global expertise of leading professionals, we are committed to protecting and enhancing the enterprise value of our clients.',
 poc_contact_number_1:'+1 866.355.6647',
 poc_contact_number_2:'+1 972.628.6827',

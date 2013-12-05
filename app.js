@@ -3,86 +3,52 @@
  * Module dependencies.
  */
 
-var express = require('express'),
-  routes = require('./routes'),a
-  user = require('./routes/user'),
-  http = require('http'),
-  path = require('path'),
-  db = require('mongoskin').db('localhost:27017/thoughtadvisor'),
-  companies = db.collection('companies');
+ var express = require('express'),
+ routes = require('./routes'),
+ companyRoutes = require('./routes/company'),
+ adminRoutes = require('./routes/admin'),
+ http = require('http'),
+ path = require('path'),
+ db = require('mongoskin').db('localhost:27017/thoughtadvisor'),
+ db2 = require('mongoskin').db('localhost:27017/movies'),
+ movies = db2.collection('movies');
 
-var app = express();
+ var app = express();
 
-app.configure(function(){
+ app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  app.use(express.favicon());
+  app.use(express.favicon(__dirname + '/public/images/favicon.ico', { maxAge: 2592000000 }));
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(require('stylus').middleware(__dirname + '/public'));
+  app.use(express.directory(path.join(__dirname, 'public')));
   app.use(express.static(path.join(__dirname, 'public')));
+
 });
 
-app.configure('development', function(){
+ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', function(req, res){
-  res.render('index', {
-    title: 'Home'
-  });
-});
-
-app.get('/about', function(req, res){
-  res.render('about', {
-    title: 'About'
-  });
-});
-
-app.get('/contact', function(req, res){
-  res.render('contact', {
-    title: 'Contact'
-  });
-});
-
-app.get('/company', function(req, res){
-  res.writeHead(200, {'Access-Control-Allow-Origin': '*', "Content-Type": "application/json"});
-  db.collection('companies').findOne({name:req.query.name}, function (e, result) {
-    if (e) throw(e);
-    res.end(JSON.stringify(result));
-  });
-});
-
-app.get('/company_names', function(req, res){
-  res.writeHead(200, {'Access-Control-Allow-Origin': '*'/*, "Content-Type": "application/json"*/});
-  console.log("query: ", req.query.urls);
-  var arr = req.query.urls;
-  companies.find({url:{$in:arr}}, {name:1, url:1, _id:0}).toArray(function (e, result) {
-    if (e) throw(e);
-    res.end(JSON.stringify(result));
-  });
-});
-
-app.get('/urls', function(req, res){
-  res.writeHead(200, {'Access-Control-Allow-Origin': '*'/*, "Content-Type": "application/json"*/});
-  db.collection('companies').find({}, {url:1, _id:0}).toArray(function (e, result) {
-    if (e) throw(e);
-    res.end(JSON.stringify(result));
-  });
-});
-
-app.get('/solr', function(req, res){
+ app.get('/', function(req, res){
   res.render('index_solr', {title: "ThoughtAdvisor"});
 });
 
-app.get('/solr2', function(req, res){
-  res.render('index_solr2', {title: "ThoughtAdvisor"});
-});
+ app.get('/company', companyRoutes.company);
 
-http.createServer(app).listen(app.get('port'), function(){
+ app.get('/company_names', companyRoutes.company_names);
+
+ app.get('/urls', companyRoutes.urls);
+
+ app.post('/add_company', adminRoutes.add_company);
+
+ app.get('/company_form', adminRoutes.company_form);
+
+ http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
 

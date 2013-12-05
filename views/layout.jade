@@ -2,28 +2,56 @@
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='stylesheet', href='/stylesheets/chunkfive-fontface.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css")
+    link(rel='stylesheet', href='/stylesheets/social-buttons.css')
+    link(rel='stylesheet', href='/stylesheets/solr.css')
+    script(type='text/javascript', src='/scripts/jquery.min.js')
+    script(type='text/javascript', src='/scripts/jquery-ui.min.js')
+    // link(rel='stylesheet', href="/stylesheets/jquery-ui.css")
+    script(type='text/javascript', src='/scripts/js/main.js')
+    script(type='text/javascript', src='scripts/core/Core.js')
+    script(type='text/javascript', src='scripts/core/AbstractManager.js')
+    script(type='text/javascript', src='scripts/managers/Manager.jquery.js')
+    script(type='text/javascript', src='scripts/core/Parameter.js')
+    script(type='text/javascript', src='scripts/core/ParameterStore.js')
+    script(type='text/javascript', src='scripts/core/AbstractWidget.js')
+    script(type='text/javascript', src='scripts/widgets/ResultWidget.2.0.js')
+    script(type='text/javascript', src='scripts/widgets/ContentTypeWidget.js')
+    script(type='text/javascript', src='scripts/widgets/jquery/PagerWidget.js')
+    script(type='text/javascript', src='scripts/core/AbstractFacetQueryWidget.js')
+    script(type='text/javascript', src='scripts/widgets/UrlQueryWidget.js')
+    script(type='text/javascript', src='scripts/widgets/CurrentSearchWidget.js')
+    script(type='text/javascript', src='scripts/core/AbstractTextWidget.js')
+    script(type='text/javascript', src='scripts/widgets/TextWidget.js')
+
   body
-    header
-      nav
-        ul
-          li 
-            a(href="/") Home
-          li 
-            a(href="/about") About
-          li 
-            a(href="/contact") Contact
-    section#wrapper
-      block content
-      footer 
-        section.css-table
-          section.four-column
-            section.cell
-              p Mauris porttitor <br />felis eu leo aliquet<br /> ac rutrum odio aliquet
-            section.cell
-              p Mauris porttitor <br />felis eu leo aliquet<br /> ac rutrum odio aliquet
-            section.cell
-              p Mauris porttitor <br />felis eu leo aliquet<br /> ac rutrum odio aliquet
-            section.cell
-              p Mauris porttitor <br />felis eu leo aliquet<br /> ac rutrum odio aliquet
+    div.navbar.navbar-inverse.navbar-static-top
+      div.navbar-inner
+        div.container
+          ul.nav.pull-left
+            li
+              a(href='/solr')
+                img(src='images/logo.png')
+            li.vertical-divider-gray
+          ul.pull-left
+            span.navbar-search#search
+              input(class="search-query", "type="text", id="query", name="query", autocomplete="off", placeholder="Search")
+    div.container
+      div.row
+      div.row-fluid
+        div.span5
+          div#company_profile
+          div#urls
+        div.span7
+          div.mycontent-right
+            div#result
+              div#content-type-navigation
+                ul#contenter
+              div#navigation
+                ul#pager
+                div#pager-header
+              div#docs
+    hr
+    div.footer
+      p Copyright &copy; 2013 Thought Advisor, LLC. All rights reserved.
